@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Follow Up Generator</title>
+  <title>Follow Up Dashboard</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -18,7 +18,7 @@
       padding: 24px;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      width: 320px;
+      width: 360px;
     }
     h2 {
       text-align: center;
@@ -68,47 +68,153 @@
     .copy-btn:hover {
       background: #059669;
     }
+    .menu {
+      display: flex;
+      justify-content: space-around;
+      background: #e5e7eb;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .menu button {
+      flex: 1;
+      border-radius: 0;
+      background: #e5e7eb;
+      color: #333;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .menu button.active {
+      background: #2563eb;
+      color: white;
+    }
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #16a34a;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    footer {
+      text-align: center;
+      margin-top: 12px;
+      color: #555;
+      font-size: 13px;
+    }
   </style>
 </head>
 <body>
   <div class="card">
-    <h2>Follow Up Generator</h2>
-    <label for="waktu">Waktu</label>
-    <select id="waktu">
-      <option value="pagi">Pagi</option>
-      <option value="siang" selected>Siang</option>
-      <option value="sore">Sore</option>
-      <option value="malam">Malam</option>
-    </select>
+    <div class="menu">
+      <button id="menuFollowUp" class="active" onclick="showTab('followup')">Follow Up</button>
+      <button id="menuBalasan" onclick="showTab('balasan')">Balasan User</button>
+    </div>
 
-    <label for="nama">Nama PT / Customer</label>
-    <input type="text" id="nama" placeholder="Contoh: PT A" />
+    <!-- FOLLOW UP SECTION -->
+    <div id="tabFollowUp">
+      <h2>Follow Up Generator</h2>
+      <label for="nama">Nama PT / Customer</label>
+      <input type="text" id="nama" placeholder="Isikan Customer" />
 
-    <button onclick="generate()">Generate Pesan</button>
+      <button onclick="generateFollowUp()">Generate Pesan</button>
 
-    <div class="output" id="output"></div>
-    <button class="copy-btn" onclick="copyText()">Copy</button>
+      <div class="output" id="outputFollowUp"></div>
+      <button class="copy-btn" onclick="copyText('outputFollowUp')">Copy</button>
+    </div>
+
+    <!-- BALASAN SECTION -->
+    <div id="tabBalasan" style="display:none;">
+      <h2>Balasan User</h2>
+      <label for="inisial">Inisial</label>
+      <select id="inisial">
+        <option value="aw">aw</option>
+        <option value="rg">rg</option>
+        <option value="ak">ak</option>
+        <option value="mt">mt</option>
+        <option value="dr">dr</option>
+        <option value="ah">ah</option>
+        <option value="ap">ap</option>
+        <option value="af">af</option>
+      </select>
+
+      <button onclick="generateBalasan()">Generate Balasan</button>
+
+      <div class="output" id="outputBalasan"></div>
+      <button class="copy-btn" onclick="copyText('outputBalasan')">Copy</button>
+    </div>
+
+    <footer>© 2025 Agung Tatto</footer>
   </div>
 
+  <div class="toast" id="toast">Pesan disalin ke clipboard!</div>
+
   <script>
-    function generate() {
-      const waktu = document.getElementById('waktu').value;
+    // Fungsi tab menu
+    function showTab(tab) {
+      document.getElementById('tabFollowUp').style.display = tab === 'followup' ? 'block' : 'none';
+      document.getElementById('tabBalasan').style.display = tab === 'balasan' ? 'block' : 'none';
+      document.getElementById('menuFollowUp').classList.toggle('active', tab === 'followup');
+      document.getElementById('menuBalasan').classList.toggle('active', tab === 'balasan');
+    }
+
+    // Fungsi deteksi waktu WIB otomatis
+    function getWaktuWIB() {
+      const now = new Date();
+      const options = { timeZone: 'Asia/Jakarta', hour: '2-digit' };
+      const hour = parseInt(new Intl.DateTimeFormat('id-ID', options).format(now));
+
+      if (hour >= 4 && hour < 11) return 'pagi';
+      if (hour >= 11 && hour < 15) return 'siang';
+      if (hour >= 15 && hour < 18) return 'sore';
+      return 'malam';
+    }
+
+    // Generate pesan follow up
+    function generateFollowUp() {
       const nama = document.getElementById('nama').value.trim();
+      const waktu = getWaktuWIB();
 
       if (!nama) {
-        document.getElementById('output').innerText = "⚠️ Harap isi nama PT/Customer terlebih dahulu.";
+        document.getElementById('outputFollowUp').innerText = "⚠️ Harap isi nama PT/Customer terlebih dahulu.";
         return;
       }
 
       const pesan = `Selamat ${waktu}, kami informasikan untuk site ${nama} termonitoring down dalam sistem kami, apabila ada kendala di lokasi bisa diinformasikan ke kami. Terima kasih.`;
-      document.getElementById('output').innerText = pesan;
+      document.getElementById('outputFollowUp').innerText = pesan;
     }
 
-    function copyText() {
-      const text = document.getElementById('output').innerText;
+    // Generate pesan balasan
+    function generateBalasan() {
+      const inisial = document.getElementById('inisial').value;
+      const waktu = getWaktuWIB();
+
+      const pesan = `Selamat ${waktu} pak, kami lakukan pengecekan dahulu mohon ditunggu. ~${inisial}`;
+      document.getElementById('outputBalasan').innerText = pesan;
+    }
+
+    // Copy text dan tampilkan notifikasi
+    function copyText(id) {
+      const text = document.getElementById(id).innerText;
       if (!text) return;
       navigator.clipboard.writeText(text);
-      alert("Pesan telah disalin ke clipboard!");
+      showToast();
+    }
+
+    // Toast otomatis
+    function showToast() {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
     }
   </script>
 </body>
