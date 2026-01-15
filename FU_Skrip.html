@@ -1,243 +1,306 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Follow Up Dashboard</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f3f4f6;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .card {
-      background: white;
-      padding: 24px;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      width: 380px;
-    }
-    h2 {
-      text-align: center;
-      color: #333;
-    }
-    label {
-      display: block;
-      margin-top: 12px;
-      font-weight: bold;
-    }
-    select, input {
-      width: 95%;
-      padding: 10px;
-      margin-top: 6px;
-      margin-right: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
-    }
-    button {
-      width: 100%;
-      margin-top: 16px;
-      padding: 10px;
-      background: #2563eb;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 15px;
-    }
-    button:hover {
-      background: #1d4ed8;
-    }
-    .output {
-      margin-top: 16px;
-      background: #f9fafb;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      padding: 10px;
-      font-size: 14px;
-      color: #333;
-      min-height: 70px;
-    }
-    .copy-btn {
-      background: #10b981;
-      margin-top: 8px;
-    }
-    .menu {
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Follow Up Dashboard</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f3f4f6;
+}
+
+.layout {
   display: flex;
-  gap: 6px;
+  height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 250px;
+  background: #1e293b;
+  color: white;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar button {
   background: transparent;
-  margin-bottom: 16px;
+  color: #cbd5f5;
+  border: none;
+  text-align: left;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
-.menu button {
-  background: #f1f5f9;
-  color: #1d4ed8;
-  border-radius: 10px;
-  padding: 8px 12px;
-  font-size: 13px;
+.sidebar button:hover {
+  background: #334155;
 }
 
-.menu button.active {
+.sidebar button.active {
   background: #2563eb;
   color: white;
 }
 
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #16a34a;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 6px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.4s ease;
-    }
-    .toast.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    footer {
-      text-align: center;
-      margin-top: 12px;
-      color: #555;
-      font-size: 13px;
-    }
-  </style>
-</head>
-<body>
+.sidebar footer {
+  margin-top: auto;
+  font-size: 12px;
+  text-align: center;
+  color: #94a3b8;
+}
 
-<div class="card">
-  <div class="menu">
-    <button class="active" id="mFollow" onclick="showTab('follow')">Follow Up</button>
-    <button id="mBalas" onclick="showTab('balas')">Balasan</button>
-    <button id="mFO" onclick="showTab('fo')">FO Template</button>
-  </div>
+/* CONTENT */
+.content {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 40px;
+}
 
-  <!-- FOLLOW UP -->
-  <div id="tabFollow">
-    <h2>Follow Up Generator</h2>
-    <label>Nama PT / Customer</label>
-    <input id="nama" placeholder="Isikan Customer">
-
-    <button onclick="generateFollowUp()">Generate</button>
-    <div class="output" id="outFollow"></div>
-    <button class="copy-btn" onclick="copyText('outFollow')">Copy</button>
-  </div>
-
-  <!-- BALASAN -->
-  <div id="tabBalas" style="display:none">
-    <h2>Balasan User</h2>
-    <label>Inisial</label>
-    <select id="inisial">
-      <option>aw</option><option>rg</option><option>ak</option>
-      <option>mt</option><option>dr</option><option>ah</option>
-      <option>ap</option><option>af</option><option>zk</option>
-      <option>rs</option>
-    </select>
-
-    <button onclick="generateBalasan()">Generate</button>
-    <div class="output" id="outBalas"></div>
-    <button class="copy-btn" onclick="copyText('outBalas')">Copy</button>
-  </div>
-
-  <!-- FO TEMPLATE -->
-  <div id="tabFO" style="display:none">
-    <h2>FO Template</h2>
-
-    <label>Inisial</label>
-    <select id="inisialFO">
-      <option>aw</option><option>rg</option><option>ak</option>
-      <option>mt</option><option>dr</option><option>ah</option>
-      <option>ap</option><option>af</option><option>zk</option>
-      <option>rs</option>
-    </select>
-
-    <label>Kondisi Backup Wireless</label>
-    <select id="backup">
-      <option value="ada">Ada Backup Wireless</option>
-      <option value="tidak">Tidak Ada Backup Wireless</option>
-    </select>
-
-    <button onclick="generateFO()">Generate</button>
-    <div class="output" id="outFO"></div>
-    <button class="copy-btn" onclick="copyText('outFO')">Copy</button>
-  </div>
-
-  <footer>© 2025 sholat adalah tiang agama</footer>
-</div>
-
-<div class="toast" id="toast">Pesan disalin ke clipboard!</div>
-
-<script>
-function showTab(tab) {
-  document.getElementById('tabFollow').style.display = 'none';
-  document.getElementById('tabBalas').style.display = 'none';
-  document.getElementById('tabFO').style.display = 'none';
-
-  document.getElementById('mFollow').classList.remove('active');
-  document.getElementById('mBalas').classList.remove('active');
-  document.getElementById('mFO').classList.remove('active');
-
-  if (tab === 'follow') {
-    document.getElementById('tabFollow').style.display = 'block';
-    document.getElementById('mFollow').classList.add('active');
-  }
-
-  if (tab === 'balas') {
-    document.getElementById('tabBalas').style.display = 'block';
-    document.getElementById('mBalas').classList.add('active');
-  }
-
-  if (tab === 'fo') {
-    document.getElementById('tabFO').style.display = 'block';
-    document.getElementById('mFO').classList.add('active');
-  }
+.card {
+  background: white;
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  width: 480px;
 }
 
 
-function getWaktuWIB() {
-  const h = new Date().toLocaleString('id-ID',{timeZone:'Asia/Jakarta',hour:'2-digit'});
-  if (h>=4 && h<11) return 'pagi';
-  if (h<15) return 'siang';
-  if (h<18) return 'sore';
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+button.action {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button.action:hover {
+  background: #1d4ed8;
+}
+
+.output {
+  margin-top: 16px;
+  background: #f9fafb;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  min-height: 70px;
+}
+
+.copy-btn {
+  width: 100%;
+  background: #10b981;
+  margin-top: 8px;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #16a34a;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all .3s;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h3>Template</h3>
+    <button id="mFollow" class="active" onclick="showTab('follow')">📌 Follow Up</button>
+    <button id="mBalas" onclick="showTab('balas')">💬 Balasan</button>
+    <button id="mFO" onclick="showTab('fo')">🛠 FO Template</button>
+    <button id="mUpstream" onclick="showTab('upstream')">🌐 Link Upstream</button>
+    <footer>© 2025<br>sholat adalah tiang agama</footer>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+    <div class="card">
+
+      <!-- FOLLOW UP -->
+      <div id="tabFollow">
+        <h2>Follow Up Generator</h2>
+        <label>Nama PT / Customer</label>
+        <input id="nama" placeholder="Isikan Customer">
+        <button class="action" onclick="generateFollowUp()">Generate</button>
+        <div class="output" id="outFollow"></div>
+        <button class="copy-btn" onclick="copyText('outFollow')">Copy</button>
+      </div>
+
+      <!-- BALASAN -->
+      <div id="tabBalas" style="display:none">
+        <h2>Balasan User</h2>
+        <label>Inisial</label>
+        <select id="inisial">
+          <option>aw</option><option>rg</option><option>ak</option>
+          <option>mt</option><option>dr</option><option>ah</option>
+          <option>ap</option><option>af</option><option>zk</option><option>rs</option>
+        </select>
+        <button class="action" onclick="generateBalasan()">Generate</button>
+        <div class="output" id="outBalas"></div>
+        <button class="copy-btn" onclick="copyText('outBalas')">Copy</button>
+      </div>
+
+      <!-- FO TEMPLATE -->
+      <div id="tabFO" style="display:none">
+        <h2>FO Template</h2>
+
+        <label>Inisial</label>
+        <select id="inisialFO">
+          <option>aw</option><option>rg</option><option>ak</option>
+          <option>mt</option><option>dr</option><option>ah</option>
+          <option>ap</option><option>af</option><option>zk</option><option>rs</option>
+        </select>
+
+        <label>Status Link FO</label>
+        <select id="statusFO">
+          <option value="down">Link FO Down</option>
+          <option value="up">Link FO Up</option>
+        </select>
+
+        <label>Kondisi Backup Wireless</label>
+        <select id="backup">
+          <option value="ada">Ada Backup Wireless</option>
+          <option value="tidak">Tidak Ada Backup Wireless</option>
+        </select>
+
+        <button class="action" onclick="generateFO()">Generate</button>
+        <div class="output" id="outFO"></div>
+        <button class="copy-btn" onclick="copyText('outFO')">Copy</button>
+      </div>
+
+      <!-- UPSTREAM -->
+      <div id="tabUpstream" style="display:none">
+        <h2>Link Upstream</h2>
+        <label>Status Upstream</label>
+        <select id="statusUpstream">
+          <option value="down">Upstream Down</option>
+          <option value="up">Upstream Up</option>
+        </select>
+        <button class="action" onclick="generateUpstream()">Generate</button>
+        <div class="output" id="outUpstream"></div>
+        <button class="copy-btn" onclick="copyText('outUpstream')">Copy</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Pesan disalin!</div>
+
+<script>
+function showTab(tab){
+  tabFollow.style.display='none';
+  tabBalas.style.display='none';
+  tabFO.style.display='none';
+  tabUpstream.style.display='none';
+
+  mFollow.classList.remove('active');
+  mBalas.classList.remove('active');
+  mFO.classList.remove('active');
+  mUpstream.classList.remove('active');
+
+  if(tab==='follow'){ tabFollow.style.display='block'; mFollow.classList.add('active'); }
+  if(tab==='balas'){ tabBalas.style.display='block'; mBalas.classList.add('active'); }
+  if(tab==='fo'){ tabFO.style.display='block'; mFO.classList.add('active'); }
+  if(tab==='upstream'){ tabUpstream.style.display='block'; mUpstream.classList.add('active'); }
+}
+
+function getWaktuWIB(){
+  const h=new Date().toLocaleString('id-ID',{timeZone:'Asia/Jakarta',hour:'2-digit'});
+  if(h>=4&&h<11) return 'pagi';
+  if(h<15) return 'siang';
+  if(h<18) return 'sore';
   return 'malam';
 }
 
 function generateFollowUp(){
-  const nama = document.getElementById('nama').value;
-  if(!nama) return outFollow.innerText="⚠️ Nama belum diisi";
-  outFollow.innerText =
-  `Selamat ${getWaktuWIB()}, kami informasikan untuk site ${nama} termonitoring down dalam sistem kami, apabila ada kendala di lokasi bisa diinformasikan ke kami. Terima kasih.`;
+  if(!nama.value) return outFollow.innerText='⚠️ Nama belum diisi';
+  outFollow.innerText=
+  `Selamat ${getWaktuWIB()}, kami informasikan untuk site ${nama.value} termonitoring down dalam sistem kami, apabila ada kendala di lokasi bisa diinformasikan ke kami. Terima kasih.`;
 }
 
 function generateBalasan(){
-  outBalas.innerText =
+  outBalas.innerText=
   `Selamat ${getWaktuWIB()} pak, kami lakukan pengecekan dahulu mohon ditunggu. ~${inisial.value}`;
 }
 
 function generateFO(){
-  const i = inisialFO.value;
-  const b = backup.value;
-  const waktu = getWaktuWIB();
-
-  let pesan = `Selamat ${waktu}, kami informasikan bahwa saat ini terdapat kendala pada link FO. `;
-
-  if (b === 'ada') {
-    pesan += `Untuk sementara, koneksi menggunakan link backup wireless. `;
+  const w=getWaktuWIB();
+  if(statusFO.value==='up'){
+    outFO.innerText=
+    `Selamat ${w}, kami informasikan untuk Link Fiber Optik sudah kembali normal dan dalam monitoring kami. Untuk koneksi internet bisa dicoba kembali. Terimakasih. ~${inisialFO.value}`;
+  } else {
+    let t=`Selamat ${w}, kami informasikan bahwa saat ini terdapat kendala pada link FO. `;
+    if(backup.value==='ada') t+=`Untuk sementara, koneksi menggunakan link backup wireless. `;
+    t+=`Kendala link FO masih dalam proses pengecekan oleh tim kami. Mohon maaf atas ketidaknyamanannya. Terima kasih. ~${inisialFO.value}`;
+    outFO.innerText=t;
   }
-
-  pesan += `Kendala link FO masih dalam proses pengecekan oleh tim kami. `;
-  pesan += `Mohon maaf atas ketidaknyamanannya. Terima kasih. ~${i}`;
-
-  outFO.innerText = pesan;
 }
 
+function generateUpstream(){
+  const w=getWaktuWIB();
+  if(statusUpstream.value==='up'){
+    outUpstream.innerText=`Selamat ${w}, kami informasikan untuk saat ini link internasional sudah normal kembali dan dalam monitoring kami. Untuk koneksi internet dapat dicoba kembali. Terimakasih.`;
+  } else {
+    outUpstream.innerText=`Selamat ${w}, kami informasikan untuk saat ini terjadi kendala pada link internasional kami dan dalam pengecekan tim lebih lanjut. Mohon maaf untuk kendalanya. Terimakasih.`;
+  }
+}
 
 function copyText(id){
   navigator.clipboard.writeText(document.getElementById(id).innerText);
@@ -245,5 +308,6 @@ function copyText(id){
   setTimeout(()=>toast.classList.remove('show'),2000);
 }
 </script>
+
 </body>
 </html>
