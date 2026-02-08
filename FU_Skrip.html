@@ -13,7 +13,7 @@
 <div class="layout">
   <!-- SIDEBAR -->
   <div class="sidebar">
-    <h3>Template</h3>
+    <h3>Template Support</h3>
     <button id="mFollow" class="active" onclick="showTab('follow')">📌 Follow Up</button>
     <button id="mBalas" onclick="showTab('balas')">💬 Balasan</button>
     <button id="mFO" onclick="showTab('fo')">🛠 FO Template</button>
@@ -93,13 +93,40 @@
 
       <!-- Tiket FO Cut -->
       <div id="tabTiketFOCut" style="display:none">
-        <h2>Create Ticket FO Cut</h2>
-        <label>Nama PT / Customer</label>
-        <input id="nama_userfo" placeholder="Isikan Customer">
-        <button class="action" onclick="generateTiketFOCut()">Generate</button>
-        <div class="output" id="ResultTiketFOCut"></div>
-        <button class="copy-btn" onclick="copyText('outUpstream')">Copy</button>
-      </div>
+
+  <h2>Create Ticket FO Cut</h2>
+
+  <div class="ticket-layout">
+
+    <!-- KOLOM KIRI -->
+    <div class="ticket-form">
+
+      <label>Nama PT / Customer</label>
+      <input id="nama_userfo" placeholder="Isikan Customer">
+
+      <button class="action" onclick="generateTiketFOCut()">Generate</button>
+
+    </div>
+
+    <!-- KOLOM KANAN -->
+    <div class="ticket-result">
+
+      <label>URL Ticket</label>
+      <div class="output" id="urlTicket"></div>
+      <button class="copy-btn" onclick="copyTextarea('urlTicket')">Copy URL</button>
+
+      <label>Script Generate</label>
+      <div class="output" id="scriptTicket"></div>
+      <button class="copy-btn" onclick="copyTextarea('scriptTicket')">Copy Script</button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
     </div>
   </div>
 </div>
@@ -111,6 +138,7 @@
 <script src="balasan.js"></script>
 <script src="linkfo.js"></script>
 <script src="upstream.js"></script>
+<script src="tiketfo.js"></script>
 
 <script>
 
