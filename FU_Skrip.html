@@ -4,155 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Follow Up Dashboard</title>
+<link rel="stylesheet" href="style.css">
 
-<style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f3f4f6;
-}
-
-.layout {
-  display: flex;
-  height: 100vh;
-}
-
-/* SIDEBAR */
-.sidebar {
-  width: 250px;
-  background: #1e293b;
-  color: white;
-  padding: 14px;
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar h3 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.sidebar button {
-  background: transparent;
-  color: #cbd5f5;
-  border: none;
-  text-align: left;
-  padding: 10px 14px;
-  border-radius: 8px;
-  margin-bottom: 6px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.sidebar button:hover {
-  background: #334155;
-}
-
-.sidebar button.active {
-  background: #2563eb;
-  color: white;
-}
-
-.sidebar footer {
-  margin-top: auto;
-  font-size: 12px;
-  text-align: center;
-  color: #94a3b8;
-}
-
-/* CONTENT */
-.content {
-  flex: 1;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 40px;
-}
-
-.card {
-  background: white;
-  padding: 28px;
-  border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  width: 480px;
-}
-
-
-h2 {
-  text-align: center;
-  color: #333;
-}
-
-label {
-  display: block;
-  margin-top: 12px;
-  font-weight: bold;
-}
-
-input, select {
-  width: 100%;
-  padding: 10px;
-  margin-top: 6px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-button.action {
-  width: 100%;
-  margin-top: 16px;
-  padding: 10px;
-  background: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-button.action:hover {
-  background: #1d4ed8;
-}
-
-.output {
-  margin-top: 16px;
-  background: #f9fafb;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 10px;
-  min-height: 70px;
-}
-
-.copy-btn {
-  width: 100%;
-  background: #10b981;
-  margin-top: 8px;
-  border: none;
-  padding: 10px;
-  border-radius: 6px;
-  color: white;
-  cursor: pointer;
-}
-
-.toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #16a34a;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 6px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all .3s;
-}
-
-.toast.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-</style>
 </head>
 
 <body>
@@ -165,6 +18,7 @@ button.action:hover {
     <button id="mBalas" onclick="showTab('balas')">💬 Balasan</button>
     <button id="mFO" onclick="showTab('fo')">🛠 FO Template</button>
     <button id="mUpstream" onclick="showTab('upstream')">🌐 Link Upstream</button>
+    <button id="mTiketFOCut" onclick="showTab('TiketFOCut')">🎫 Tiket FO Cut</button>
     <footer>© 2025<br>Support</footer>
   </div>
 
@@ -237,70 +91,28 @@ button.action:hover {
         <button class="copy-btn" onclick="copyText('outUpstream')">Copy</button>
       </div>
 
+      <!-- Tiket FO Cut -->
+      <div id="tabTiketFOCut" style="display:none">
+        <h2>Create Ticket FO Cut</h2>
+        <label>Nama PT / Customer</label>
+        <input id="nama_userfo" placeholder="Isikan Customer">
+        <button class="action" onclick="generateTiketFOCut()">Generate</button>
+        <div class="output" id="ResultTiketFOCut"></div>
+        <button class="copy-btn" onclick="copyText('outUpstream')">Copy</button>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="toast" id="toast">Pesan disalin!</div>
 
+<script src="main.js"></script>
+<script src="followup.js"></script>
+<script src="balasan.js"></script>
+<script src="linkfo.js"></script>
+<script src="upstream.js"></script>
+
 <script>
-function showTab(tab){
-  tabFollow.style.display='none';
-  tabBalas.style.display='none';
-  tabFO.style.display='none';
-  tabUpstream.style.display='none';
-
-  mFollow.classList.remove('active');
-  mBalas.classList.remove('active');
-  mFO.classList.remove('active');
-  mUpstream.classList.remove('active');
-
-  if(tab==='follow'){ tabFollow.style.display='block'; mFollow.classList.add('active'); }
-  if(tab==='balas'){ tabBalas.style.display='block'; mBalas.classList.add('active'); }
-  if(tab==='fo'){ tabFO.style.display='block'; mFO.classList.add('active'); }
-  if(tab==='upstream'){ tabUpstream.style.display='block'; mUpstream.classList.add('active'); }
-}
-
-function getWaktuWIB(){
-  const h=new Date().toLocaleString('id-ID',{timeZone:'Asia/Jakarta',hour:'2-digit'});
-  if(h>=4&&h<11) return 'pagi';
-  if(h<15) return 'siang';
-  if(h<18) return 'sore';
-  return 'malam';
-}
-
-function generateFollowUp(){
-  if(!nama.value) return outFollow.innerText='⚠️ Nama belum diisi';
-  outFollow.innerText=
-  `Selamat ${getWaktuWIB()}, kami informasikan untuk site ${nama.value} termonitoring down dalam sistem kami, apabila ada kendala di lokasi bisa diinformasikan ke kami. Terima kasih.`;
-}
-
-function generateBalasan(){
-  outBalas.innerText=
-  `Selamat ${getWaktuWIB()} pak, kami lakukan pengecekan dahulu mohon ditunggu. ~${inisial.value}`;
-}
-
-function generateFO(){
-  const w=getWaktuWIB();
-  if(statusFO.value==='up'){
-    outFO.innerText=
-    `Selamat ${w}, kami informasikan untuk Link Fiber Optik sudah kembali normal dan dalam monitoring kami. Untuk koneksi internet bisa dicoba kembali. Terimakasih. ~${inisialFO.value}`;
-  } else {
-    let t=`Selamat ${w}, kami informasikan bahwa saat ini terdapat kendala pada link FO. `;
-    if(backup.value==='ada') t+=`Untuk sementara, koneksi menggunakan link backup wireless. `;
-    t+=`Kendala link FO masih dalam proses pengecekan oleh tim kami. Mohon maaf atas ketidaknyamanannya. Terima kasih. ~${inisialFO.value}`;
-    outFO.innerText=t;
-  }
-}
-
-function generateUpstream(){
-  const w=getWaktuWIB();
-  if(statusUpstream.value==='up'){
-    outUpstream.innerText=`Selamat ${w}, kami informasikan untuk saat ini link internasional sudah normal kembali dan dalam monitoring kami. Untuk koneksi internet dapat dicoba kembali. Terimakasih.`;
-  } else {
-    outUpstream.innerText=`Selamat ${w}, kami informasikan untuk saat ini terjadi kendala pada link internasional kami dan dalam pengecekan tim lebih lanjut. Mohon maaf untuk kendalanya. Terimakasih.`;
-  }
-}
 
 function copyText(id){
   navigator.clipboard.writeText(document.getElementById(id).innerText);

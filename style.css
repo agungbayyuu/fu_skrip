@@ -1,0 +1,146 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f3f4f6;
+}
+
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 250px;
+  background: #1e293b;
+  color: white;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar button {
+  background: transparent;
+  color: #cbd5f5;
+  border: none;
+  text-align: left;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.sidebar button:hover {
+  background: #334155;
+}
+
+.sidebar button.active {
+  background: #2563eb;
+  color: white;
+}
+
+.sidebar footer {
+  margin-top: auto;
+  font-size: 12px;
+  text-align: center;
+  color: #94a3b8;
+}
+
+/* CONTENT */
+.content {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 40px;
+}
+
+.card {
+  background: white;
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  width: 480px;
+}
+
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+button.action {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button.action:hover {
+  background: #1d4ed8;
+}
+
+.output {
+  margin-top: 16px;
+  background: #f9fafb;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  min-height: 70px;
+}
+
+.copy-btn {
+  width: 100%;
+  background: #10b981;
+  margin-top: 8px;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #16a34a;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all .3s;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
