@@ -2,7 +2,7 @@ function generateFO(){
   const w=getWaktuWIB();
   if(statusFO.value==='up'){
     outFO.innerText=
-    `Selamat ${w}, kami informasikan untuk Link Fiber Optik sudah kembali normal dan dalam monitoring kami. Untuk koneksi internet bisa dicoba kembali. Terimakasih. ~${inisialFO.value}`;
+    `Selamat ${w}, kami informasikan untuk link FO sudah kembali normal dan dalam monitoring kami. Untuk koneksi internet bisa dicoba kembali. Terimakasih. ~${inisialFO.value}`;
   } else {
     let t=`Selamat ${w}, kami informasikan bahwa saat ini terdapat kendala pada link FO. `;
     if(backup.value==='ada') t+=`Untuk sementara, koneksi menggunakan link backup wireless. `;

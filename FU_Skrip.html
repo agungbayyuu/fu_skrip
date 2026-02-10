@@ -24,7 +24,7 @@
 
   <!-- CONTENT -->
   <div class="content">
-    <div class="card">
+    <div class="card" class="test">
 
       <!-- FOLLOW UP -->
       <div id="tabFollow">
@@ -37,8 +37,69 @@
       </div>
 
       <!-- BALASAN -->
-      <div id="tabBalas" style="display:none">
-        <h2>Balasan User</h2>
+      <div id="tabBalas">
+
+        <div class="balas1">
+          <h2>Balasan User</h2>
+          <label>Inisial</label>
+          <select id="inisial">
+            <option>aw</option><option>rg</option><option>ak</option>
+            <option>mt</option><option>dr</option><option>ah</option>
+            <option>ap</option><option>af</option><option>zk</option><option>rs</option>
+          </select>
+          <button class="action" onclick="generateBalasan()">Generate</button>
+
+        
+          <div class="output-grid">
+            
+            <div class="output-item">
+              <h4>Terima Komplain</h4>
+              <div class="output" id="outBalas"></div>
+              <button class="copy-btn" onclick="copyText('outBalas')">Copy</button>
+            </div>
+
+            <div class="output-item">
+              <h4>Update Non Massal</h4>
+              <div class="output" id="outUpdateNonMassal"></div>
+              <button class="copy-btn" onclick="copyText('outUpdateNonMassal')">Copy</button>
+            </div>
+
+            <div class="output-item">
+              <h4>Update Massal</h4>
+              <div class="output" id="outUpdateMassal"></div>
+              <button class="copy-btn" onclick="copyText('outUpdateMassal')">Copy</button>
+            </div>
+
+            <div class="output-item">
+              <h4>Optimasi Link</h4>
+              <div class="output" id="outOptimasi"></div>
+              <button class="copy-btn" onclick="copyText('outOptimasi')">Copy</button>
+            </div>
+
+            <div class="output-item">
+              <h4>Tambahan Waktu</h4>
+              <div class="output" id="outTambahanWaktu"></div>
+              <button class="copy-btn" onclick="copyText('outTambahanWaktu')">Copy</button>
+            </div>
+
+            <div class="output-item">
+              <h4>Minta Foto Perangkat</h4>
+              <div class="output" id="outFoto"></div>
+              <button class="copy-btn" onclick="copyText('outFoto')">Copy</button>
+            </div>
+
+            <div class="output-item">
+              <h4>Update Solved</h4>
+              <div class="output" id="outSolved"></div>
+              <button class="copy-btn" onclick="copyText('outSolved')">Copy</button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- <div class="balas1">
+          <h2>Balasan User</h2>
         <label>Inisial</label>
         <select id="inisial">
           <option>aw</option><option>rg</option><option>ak</option>
@@ -48,7 +109,9 @@
         <button class="action" onclick="generateBalasan()">Generate</button>
         <div class="output" id="outBalas"></div>
         <button class="copy-btn" onclick="copyText('outBalas')">Copy</button>
+        </div> -->
       </div>
+      
 
       <!-- FO TEMPLATE -->
       <div id="tabFO" style="display:none">
