@@ -10,6 +10,19 @@ function showTab(tab){
   if(tab==='fo') tabFO.style.display='block';
   if(tab==='upstream') tabUpstream.style.display='block';
   if(tab==='TiketFOCut') tabTiketFOCut.style.display='block';
+
+  const buttons = document.querySelectorAll('.sidebar button');
+  
+  // Hapus class 'active' dari semua button
+  buttons.forEach(btn => btn.classList.remove('active'));
+
+  // Tambahkan class 'active' ke button yang sedang diklik
+  // Kita cari button berdasarkan ID yang sesuai dengan parameter 'tab'
+  if (tab === 'follow') document.getElementById('mFollow').classList.add('active');
+  if (tab === 'balas') document.getElementById('mBalas').classList.add('active');
+  if (tab === 'fo') document.getElementById('mFO').classList.add('active');
+  if (tab === 'upstream') document.getElementById('mUpstream').classList.add('active');
+  if (tab === 'TiketFOCut') document.getElementById('mTiketFOCut').classList.add('active');
 }
 
  function getWaktuWIB(){
