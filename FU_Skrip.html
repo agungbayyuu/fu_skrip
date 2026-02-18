@@ -28,7 +28,7 @@
 
       <!-- FOLLOW UP -->
       <div id="tabFollow">
-        <h2>Follow Up Generator</h2>
+        <h2>Follow Up Zabbix</h2>
         <label>Nama PT / Customer</label>
         <input id="nama" placeholder="Isikan Customer">
         <button class="action" onclick="generateFollowUp()">Generate</button>
@@ -51,6 +51,12 @@
 
         
           <div class="output-grid">
+
+            <div class="output-item">
+              <h4>Update Experience User</h4>
+              <div class="output" id="outUpdateExperience"></div>
+              <button class="copy-btn" onclick="copyText('outUpdateExperience')">Copy</button>
+            </div>
             
             <div class="output-item">
               <h4>Terima Komplain</h4>
@@ -93,23 +99,8 @@
               <div class="output" id="outSolved"></div>
               <button class="copy-btn" onclick="copyText('outSolved')">Copy</button>
             </div>
-
           </div>
-
         </div>
-
-        <!-- <div class="balas1">
-          <h2>Balasan User</h2>
-        <label>Inisial</label>
-        <select id="inisial">
-          <option>aw</option><option>rg</option><option>ak</option>
-          <option>mt</option><option>dr</option><option>ah</option>
-          <option>ap</option><option>af</option><option>zk</option><option>rs</option>
-        </select>
-        <button class="action" onclick="generateBalasan()">Generate</button>
-        <div class="output" id="outBalas"></div>
-        <button class="copy-btn" onclick="copyText('outBalas')">Copy</button>
-        </div> -->
       </div>
       
 
@@ -176,11 +167,11 @@
 
       <label>URL Ticket</label>
       <div class="output" id="urlTicket"></div>
-      <button class="copy-btn" onclick="copyTextarea('urlTicket')">Copy URL</button>
+      <button class="copy-btn" onclick="copyText('urlTicket')">Copy URL</button>
 
       <label>Script Generate</label>
       <div class="output" id="scriptTicket"></div>
-      <button class="copy-btn" onclick="copyTextarea('scriptTicket')">Copy Script</button>
+      <button class="copy-btn" onclick="copyText('scriptTicket')">Copy Script</button>
 
     </div>
 

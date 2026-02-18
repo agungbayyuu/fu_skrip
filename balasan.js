@@ -4,6 +4,13 @@ function generateBalasan(){
   const nama = "Bapak/Ibu [Nama]";
   const waktu = getWaktuWIB();
 
+    // Update Experience
+  document.getElementById("outUpdateExperience").innerText =
+`Selamat ${waktu} ${nama}.
+Mohon informasinya terkait kendala yang sebelumnya dilaporkan apakah saat ini sudah berjalan normal?
+Apabila saat ini sudah tidak ada kendala, kami mohon izin untuk menutup case tersebut.
+Terimakasih. ~${ini}`;
+
   // TERIMA KOMPLAIN
   document.getElementById("outBalas").innerText =
 `Selamat ${waktu} ${nama}.
