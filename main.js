@@ -12,10 +12,17 @@ function showTab(tab){
   if(tab==='TiketFOCut') tabTiketFOCut.style.display='block';
 }
 
-function getWaktuWIB(){
-  const h=new Date().toLocaleString('id-ID',{timeZone:'Asia/Jakarta',hour:'2-digit'});
-  if(h>=4&&h<11) return 'pagi';
-  if(h<15) return 'siang';
-  if(h<18) return 'sore';
-  return 'malam';
+ function getWaktuWIB(){
+      const now = new Date();
+      const options = { timeZone: 'Asia/Jakarta', hour: '2-digit' };
+      const hour = parseInt(new Intl.DateTimeFormat('id-ID', options).format(now));
+      console.log(hour);
+
+      if (hour >= 2 && hour < 11) return 'pagi';
+      if (hour >= 11 && hour < 15) return 'siang';
+      if (hour >= 15 && hour < 18) return 'sore';
+      return 'malam';
 }
+
+
+

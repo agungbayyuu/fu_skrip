@@ -1,4 +1,6 @@
+
 function generateFollowUp(){
+  console.log(getWaktuWIB());
   if(!nama.value) return outFollow.innerText='⚠️ Nama belum diisi';
 
   outFollow.innerText=
