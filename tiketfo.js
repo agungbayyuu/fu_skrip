@@ -16,7 +16,7 @@ function generateTiketFOCut(){
 
   $(document).one('ajaxStop', function () {
 
-    $('#issue_subject').val('Link FO Cut - ${nama}');
+    $('#issue_subject').val('(Link Problem) FO Cut - ${nama}');
 
     $('#issue_description').val(
 \`Dear Team

@@ -19,12 +19,26 @@
     <button id="mFO" onclick="showTab('fo')">🛠 FO Template</button>
     <button id="mUpstream" onclick="showTab('upstream')">🌐 Link Upstream</button>
     <button id="mTiketFOCut" onclick="showTab('TiketFOCut')">🎫 Tiket FO Cut</button>
+    <button id="mUpdateTiketMonitoring" onclick="showTab('UpdateTiketMonitoring')">🎫 Update Tiket Monitoring</button>
     <footer>© 2025<br>Support</footer>
   </div>
 
   <!-- CONTENT -->
   <div class="content">
     <div class="card" class="test">
+
+      <!-- UPDATE TIKET MONITORING -->
+      <div id="tabUpdateTiketMonitoring" style="display:none">
+        <h2>Update Tiket Monitoring</h2>
+        
+      <div class="output" id="outUpdateTiketMonitoring">
+      Dear Team
+
+      Berikut monitoring pada tanggal <span id="autoTanggal"></span> : 
+
+      Terimakasih</div>
+        <button class="copy-btn" onclick="copyText('outUpdateTiketMonitoring')">Copy</button>
+      </div>
 
       <!-- FOLLOW UP -->
       <div id="tabFollow">
@@ -193,8 +207,17 @@
 <script src="linkfo.js"></script>
 <script src="upstream.js"></script>
 <script src="tiketfo.js"></script>
+<script src="updatetiketmonitoring.js"></script>
 
 <script>
+  // Fungsi ini langsung berjalan otomatis saat file dimuat
+(function autoFillTanggal() {
+  const element = document.getElementById('autoTanggal');
+  if (element) {
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    element.innerText = new Date().toLocaleDateString('id-ID', options);
+  }
+})();
 
 function copyText(id){
   navigator.clipboard.writeText(document.getElementById(id).innerText);

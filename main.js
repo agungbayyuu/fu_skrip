@@ -4,12 +4,17 @@ function showTab(tab){
   tabFO.style.display='none';
   tabUpstream.style.display='none';
   tabTiketFOCut.style.display='none';
+  tabUpdateTiketMonitoring.style.display='none';
+
 
   if(tab==='follow') tabFollow.style.display='block';
   if(tab==='balas') tabBalas.style.display='block';
   if(tab==='fo') tabFO.style.display='block';
   if(tab==='upstream') tabUpstream.style.display='block';
   if(tab==='TiketFOCut') tabTiketFOCut.style.display='block';
+  if(tab==='UpdateTiketMonitoring') tabUpdateTiketMonitoring.style.display='block'; generateUpdateTiket();
+  
+
 
   const buttons = document.querySelectorAll('.sidebar button');
   
@@ -23,6 +28,8 @@ function showTab(tab){
   if (tab === 'fo') document.getElementById('mFO').classList.add('active');
   if (tab === 'upstream') document.getElementById('mUpstream').classList.add('active');
   if (tab === 'TiketFOCut') document.getElementById('mTiketFOCut').classList.add('active');
+  if (tab === 'UpdateTiketMonitoring') document.getElementById('mUpdateTiketMonitoring').classList.add('active');
+
 }
 
  function getWaktuWIB(){
