@@ -12,7 +12,7 @@ function showTab(tab){
   if(tab==='fo') tabFO.style.display='block';
   if(tab==='upstream') tabUpstream.style.display='block';
   if(tab==='TiketFOCut') tabTiketFOCut.style.display='block';
-  if(tab==='UpdateTiketMonitoring') tabUpdateTiketMonitoring.style.display='block'; generateUpdateTiket();
+  if(tab==='UpdateTiketMonitoring') tabUpdateTiketMonitoring.style.display='block';
   
 
 
