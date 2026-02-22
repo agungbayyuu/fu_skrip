@@ -20,12 +20,26 @@
     <button id="mUpstream" onclick="showTab('upstream')">🌐 Link Upstream</button>
     <button id="mTiketFOCut" onclick="showTab('TiketFOCut')">🎫 Tiket FO Cut</button>
     <button id="mUpdateTiketMonitoring" onclick="showTab('UpdateTiketMonitoring')">🎫 Update Tiket Monitoring</button>
+    <button id="mSpammingEmail" onclick="showTab('SpammingEmail')">🚫 Spamming Email</button>
     <footer>© 2025<br>Support</footer>
   </div>
 
   <!-- CONTENT -->
   <div class="content">
     <div class="card" class="test">
+
+      <!-- SPAM EMAIL -->
+      <div id="tabSpamEmail" style="display:none">
+        <h2>Spam Email</h2>
+        <label>Email</label>
+        <input id="email" placeholder="Isikan Email">
+        <label>Password</label>
+        <input id="password_email" placeholder="Isikan Password yang telah direset SA">
+      <button class="action" onclick="generateSpamEmail()">Generate</button>
+      <div class="output" id="outSpamEmail"></div>
+        <button class="copy-btn" onclick="copyText('outSpamEmail')">Copy</button>
+        
+      </div>
 
       <!-- UPDATE TIKET MONITORING -->
       <div id="tabUpdateTiketMonitoring" style="display:none">
@@ -232,6 +246,7 @@ Terimakasih</div>
 <script src="upstream.js"></script>
 <script src="tiketfo.js"></script>
 <script src="updatetiketmonitoring.js"></script>
+<script src="spamemail.js"></script>
 
 <script>
   // Fungsi ini langsung berjalan otomatis saat file dimuat

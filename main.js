@@ -5,6 +5,7 @@ function showTab(tab){
   tabUpstream.style.display='none';
   tabTiketFOCut.style.display='none';
   tabUpdateTiketMonitoring.style.display='none';
+  tabSpamEmail.style.display='none';
 
 
   if(tab==='follow') tabFollow.style.display='block';
@@ -13,6 +14,7 @@ function showTab(tab){
   if(tab==='upstream') tabUpstream.style.display='block';
   if(tab==='TiketFOCut') tabTiketFOCut.style.display='block';
   if(tab==='UpdateTiketMonitoring') tabUpdateTiketMonitoring.style.display='block';
+  if(tab==='SpammingEmail') tabSpamEmail.style.display='block';
   
 
 
@@ -29,7 +31,7 @@ function showTab(tab){
   if (tab === 'upstream') document.getElementById('mUpstream').classList.add('active');
   if (tab === 'TiketFOCut') document.getElementById('mTiketFOCut').classList.add('active');
   if (tab === 'UpdateTiketMonitoring') document.getElementById('mUpdateTiketMonitoring').classList.add('active');
-
+  if (tab === 'SpammingEmail') document.getElementById('mSpammingEmail').classList.add('active');
 }
 
  function getWaktuWIB(){
