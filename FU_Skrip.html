@@ -21,12 +21,25 @@
     <button id="mTiketFOCut" onclick="showTab('TiketFOCut')">🎫 Tiket FO Cut</button>
     <button id="mUpdateTiketMonitoring" onclick="showTab('UpdateTiketMonitoring')">🎫 Update Tiket Monitoring</button>
     <button id="mSpammingEmail" onclick="showTab('SpammingEmail')">🚫 Spamming Email</button>
+    <button id="mLaporFOProblem" onclick="showTab('LaporFOProblem')">🌐 Lapor 3rd Party FO</button>
     <footer>© 2025<br>Support</footer>
   </div>
 
   <!-- CONTENT -->
   <div class="content">
     <div class="card" class="test">
+      <div id="tabLaporFOProblem" style="display:none">
+          <h2>Lapor FO Problem 3rd Party</h2>
+          <label>Nama PT / Customer</label>
+          <input id="nama_user_lapor_fo" placeholder="Isikan Customer">
+          <label>Problem</label>
+          <select id="problemFO">
+            <option value="down">Link FO Down</option>
+            <option value="intermitten">Link FO Intermitten</option>
+        </select>
+          <button class="action" onclick="generateLaporFO()">Generate</button>
+          <div class="output" id="outLaporFOProblem"></div>
+      </div>
 
       <!-- SPAM EMAIL -->
       <div id="tabSpamEmail" style="display:none">
@@ -252,6 +265,7 @@ Terimakasih</div>
 <script src="tiketfo.js"></script>
 <script src="updatetiketmonitoring.js"></script>
 <script src="spamemail.js"></script>
+<script src="laporfo.js"></script>
 
 <script>
   // Fungsi ini langsung berjalan otomatis saat file dimuat
