@@ -4,6 +4,11 @@ function generateBalasan(){
   const nama = "Bapak/Ibu [Nama]";
   const waktu = getWaktuWIB();
 
+      // Update Experience
+  document.getElementById("outBalasSimple").innerText =
+`Selamat ${waktu}.
+Kami lakukan pengecekan dahulu pak. Mohon ditunggu. ~${ini}`;
+
     // Update Experience
   document.getElementById("outUpdateExperience").innerText =
 `Selamat ${waktu} ${nama}.
