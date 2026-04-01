@@ -22,6 +22,7 @@
     <button id="mUpdateTiketMonitoring" onclick="showTab('UpdateTiketMonitoring')">🎫 Update Tiket Monitoring</button>
     <button id="mSpammingEmail" onclick="showTab('SpammingEmail')">🚫 Spamming Email</button>
     <button id="mLaporFOProblem" onclick="showTab('LaporFOProblem')">🌐 Lapor 3rd Party FO</button>
+    <button id="mTestFailover" onclick="showTab('TestFailover')">🌐 Test Failover</button>
     <footer>© 2025<br>Support</footer>
   </div>
 
@@ -66,6 +67,45 @@ Berikut monitoring pada tanggal <span id="autoTanggal"></span> :
 
 Terimakasih</div>
         <button class="copy-btn" onclick="copyText('outUpdateTiketMonitoring')">Copy</button>
+        
+      </div>
+
+      <!-- UPDATE TIKET MONITORING -->
+      <div id="tabTestFailover" style="display:none">
+        <h2>Script Test Failover</h2>
+        <label>Script Generate</label>
+      <div class="output" id="outTestFailover">
+(function () {
+
+  $('#issue_tracker_id').val('0').trigger('change');
+  $('#issue_status_id').val('1').trigger('change');
+  $('#issue_category_id').val('159805').trigger('change');
+
+  $(document).one('ajaxStop', function () {
+
+    $('#issue_subject').val('Testing Failover <span id="autoTanggal_TestFailover"></span>');
+
+    $('#issue_description').val(
+`Dear Team
+
+Berikut pengetesan Failover :
+
+1. Bandwidth test link wireless
+
+2. Test disable OSPF link FO`
+    );
+
+    $('#issue_assigned_to_id').val('179');
+
+    $('#issue_category_id').val('159805').trigger('change');
+
+    console.log('✔️ Ticket FO Cut berhasil digenerate');
+
+  });
+
+})();
+</div>
+        <button class="copy-btn" onclick="copyText('outTestFailover')">Copy</button>
         
       </div>
 
@@ -272,6 +312,14 @@ Terimakasih</div>
   // Fungsi ini langsung berjalan otomatis saat file dimuat
 (function autoFillTanggal() {
   const element = document.getElementById('autoTanggal');
+  if (element) {
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    element.innerText = new Date().toLocaleDateString('id-ID', options);
+  }
+})();
+
+(function autoFillTanggal() {
+  const element = document.getElementById('autoTanggal_TestFailover');
   if (element) {
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     element.innerText = new Date().toLocaleDateString('id-ID', options);

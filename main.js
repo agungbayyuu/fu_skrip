@@ -7,6 +7,7 @@ function showTab(tab){
   tabUpdateTiketMonitoring.style.display='none';
   tabSpamEmail.style.display='none';
   tabLaporFOProblem.style.display='none';
+  tabTestFailover.style.display='none';
 
 
   if(tab==='follow') tabFollow.style.display='block';
@@ -17,6 +18,7 @@ function showTab(tab){
   if(tab==='UpdateTiketMonitoring') tabUpdateTiketMonitoring.style.display='block';
   if(tab==='SpammingEmail') tabSpamEmail.style.display='block';
   if(tab==='LaporFOProblem') tabLaporFOProblem.style.display='block';
+  if(tab==='TestFailover') tabTestFailover.style.display='block';
   
 
 
@@ -35,6 +37,7 @@ function showTab(tab){
   if (tab === 'UpdateTiketMonitoring') document.getElementById('mUpdateTiketMonitoring').classList.add('active');
   if (tab === 'SpammingEmail') document.getElementById('mSpammingEmail').classList.add('active');
   if (tab === 'LaporFOProblem') document.getElementById('mLaporFOProblem').classList.add('active');
+  if (tab === 'TestFailover') document.getElementById('mTestFailover').classList.add('active');
 }
 
  function getWaktuWIB(){
