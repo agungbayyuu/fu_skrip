@@ -8,6 +8,7 @@ function showTab(tab){
   tabSpamEmail.style.display='none';
   tabLaporFOProblem.style.display='none';
   tabTestFailover.style.display='none';
+  tabBandwidthTest.style.display='none';
 
 
   if(tab==='follow') tabFollow.style.display='block';
@@ -19,6 +20,7 @@ function showTab(tab){
   if(tab==='SpammingEmail') tabSpamEmail.style.display='block';
   if(tab==='LaporFOProblem') tabLaporFOProblem.style.display='block';
   if(tab==='TestFailover') tabTestFailover.style.display='block';
+  if(tab==='BandwidthTest') tabBandwidthTest.style.display='block';
   
 
 
@@ -38,6 +40,7 @@ function showTab(tab){
   if (tab === 'SpammingEmail') document.getElementById('mSpammingEmail').classList.add('active');
   if (tab === 'LaporFOProblem') document.getElementById('mLaporFOProblem').classList.add('active');
   if (tab === 'TestFailover') document.getElementById('mTestFailover').classList.add('active');
+  if (tab === 'BandwidthTest') document.getElementById('mBandwidthTest').classList.add('active');
 }
 
  function getWaktuWIB(){

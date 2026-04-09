@@ -23,12 +23,27 @@
     <button id="mSpammingEmail" onclick="showTab('SpammingEmail')">🚫 Spamming Email</button>
     <button id="mLaporFOProblem" onclick="showTab('LaporFOProblem')">🌐 Lapor 3rd Party FO</button>
     <button id="mTestFailover" onclick="showTab('TestFailover')">🌐 Test Failover</button>
+    <button id="mBandwidthTest" onclick="showTab('BandwidthTest')">🌐 Bandwidth Test</button>
     <footer>© 2025<br>Support</footer>
   </div>
 
   <!-- CONTENT -->
   <div class="content">
     <div class="card" class="test">
+
+      <!-- Bandwidth Test -->
+      <div id="tabBandwidthTest" style="display:none">
+        <h2>Bandwidth Test</h2>
+        <label>Subnet IP Customer</label>
+        <input id="subnet_ip" placeholder="Isikan subnet IP">
+        <label>Bandwidth Layanan</label>
+        <input id="bandwidth_layanan" placeholder="Isikan Layanan Bandwidth User">
+      <button class="action" onclick="generateBandwidthTest()">Generate</button>
+      <div class="output" id="outBandwidthTest"></div>
+        <button class="copy-btn" onclick="copyText('outBandwidthTest')">Copy</button>
+        
+      </div>
+
       <div id="tabLaporFOProblem" style="display:none">
           <h2>Lapor FO Problem 3rd Party</h2>
           <label>Nama PT / Customer</label>
@@ -42,6 +57,8 @@
           <div class="output" id="outLaporFOProblem"></div>
           <button class="copy-btn" onclick="copyText('outLaporFOProblem')">Copy</button>
       </div>
+
+      
 
       <!-- SPAM EMAIL -->
       <div id="tabSpamEmail" style="display:none">
@@ -307,6 +324,7 @@ Berikut pengetesan Failover :
 <script src="updatetiketmonitoring.js"></script>
 <script src="spamemail.js"></script>
 <script src="laporfo.js"></script>
+<script src="bwtest.js"></script>
 
 <script>
   // Fungsi ini langsung berjalan otomatis saat file dimuat
