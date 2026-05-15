@@ -84,6 +84,17 @@ Berikut monitoring pada tanggal <span id="autoTanggal"></span> :
 
 Terimakasih</div>
         <button class="copy-btn" onclick="copyText('outUpdateTiketMonitoring')">Copy</button>
+
+        <div class="output" id="outUpdateTiketMonitoringPlotter">
+Dear Team
+
+Berikut monitoring on webplotter :
+
+IP : 
+URL :
+
+Terimakasih</div>
+        <button class="copy-btn" onclick="copyText('outUpdateTiketMonitoringPlotter')">Copy</button>
         
       </div>
 
@@ -131,6 +142,12 @@ Berikut pengetesan Failover :
         <h2>Follow Up Zabbix</h2>
         <label>Nama PT / Customer</label>
         <input id="nama" placeholder="Isikan Customer">
+        <label>Inisial</label>
+        <select id="inisialFU">
+            <option>aw</option><option>rg</option><option>ak</option>
+            <option>mt</option><option>dr</option><option>ah</option>
+            <option>ap</option><option>af</option><option>zk</option><option>rs</option>
+          </select>
         <button class="action" onclick="generateFollowUp()">Generate</button>
         <div class="output" id="outFollow"></div>
         <button class="copy-btn" onclick="copyText('outFollow')">Copy</button>
@@ -235,6 +252,9 @@ Berikut pengetesan Failover :
       <!-- FO TEMPLATE -->
       <div id="tabFO" style="display:none">
         <h2>FO Template</h2>
+
+        <label>Nama PT / Customer</label>
+        <input id="nama_FO" placeholder="Isikan Customer">
 
         <label>Inisial</label>
         <select id="inisialFO">

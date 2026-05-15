@@ -21,7 +21,11 @@ function generateTiketFOCut(){
     $('#issue_description').val(
 \`Dear Team
 
-Terpantau link FO Cut pada site ${nama}.\`
+Terpantau link FO Cut pada site ${nama}.
+
+Status saat ini masih dalam progress pengecekan pada vendor terkait.
+
+Terimakasih\`
     );
 
     $('#issue_assigned_to_id').val('179');
