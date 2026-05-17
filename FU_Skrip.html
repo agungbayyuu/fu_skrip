@@ -252,32 +252,60 @@ Berikut pengetesan Failover :
       <!-- FO TEMPLATE -->
       <div id="tabFO" style="display:none">
         <h2>FO Template</h2>
+        <div class="output-grid">
+            <div class="output-item">
+              <label>Nama PT / Customer</label>
+              <input id="nama_FO" placeholder="Isikan Customer">
 
-        <label>Nama PT / Customer</label>
-        <input id="nama_FO" placeholder="Isikan Customer">
+              <label>Inisial</label>
+              <select id="inisialFO">
+                <option>aw</option><option>rg</option><option>ak</option>
+                <option>mt</option><option>dr</option><option>ah</option>
+                <option>ap</option><option>af</option><option>zk</option><option>rs</option>
+              </select>
 
-        <label>Inisial</label>
-        <select id="inisialFO">
-          <option>aw</option><option>rg</option><option>ak</option>
-          <option>mt</option><option>dr</option><option>ah</option>
-          <option>ap</option><option>af</option><option>zk</option><option>rs</option>
-        </select>
+              <label>Status Link FO</label>
+              <select id="statusFO">
+                <option value="down">Link FO Down</option>
+                <option value="up">Link FO Up</option>
+              </select>
 
-        <label>Status Link FO</label>
-        <select id="statusFO">
-          <option value="down">Link FO Down</option>
-          <option value="up">Link FO Up</option>
-        </select>
-
-        <label>Kondisi Backup Wireless</label>
-        <select id="backup">
-          <option value="ada">Ada Backup Wireless</option>
-          <option value="tidak">Tidak Ada Backup Wireless</option>
-        </select>
-
-        <button class="action" onclick="generateFO()">Generate</button>
-        <div class="output" id="outFO"></div>
-        <button class="copy-btn" onclick="copyText('outFO')">Copy</button>
+              <label>Kondisi Backup Wireless</label>
+              <select id="backup">
+                <option value="ada">Ada Backup Wireless</option>
+                <option value="tidak">Tidak Ada Backup Wireless</option>
+              </select>
+              <button class="action" onclick="generateFO()">Generate</button>
+            </div>
+            <div class="output-item">
+              <div class="output" id="outFO"></div>
+              <button class="copy-btn" onclick="copyText('outFO')">Copy</button>
+            </div>
+            <div class="output-item">
+              <h4>RFO TEMPLATE</h4>
+              <label>Waktu Mulai </label>
+              <input id="rfo_waktuMulai" placeholder="Isikan Waktu Mulai">
+              <label>Waktu Selesai</label>
+              <input id="rfo_waktuSelesai" placeholder="Isikan Waktu Selesai">
+              <label>Detail Gangguan</label>
+              <input id="rfo_detailGangguan" placeholder="Isikan Detail Gangguan">
+              <label>Tindakan</label>
+              <input id="rfo_tindakan" placeholder="Isikan Tindakan">
+              <button class="action" onclick="generateRFO()">Generate</button>
+            </div>
+            <div class="output-item">
+              <h4>TEMPLATE SAAT RFO TO USER</h4>
+              <div class="output" id="out_RFO">
+              </div>
+              <button class="copy-btn" onclick="copyText('out_RFO')">Copy</button>
+            </div>
+            <div class="output-item">
+              <h4>TEMPLATE SAAT RFO BELUM ADA</h4>
+              <div class="output" id="out_nonRFO">
+              </div>
+              <button class="copy-btn" onclick="copyText('out_nonRFO')">Copy</button>
+            </div>
+          </div>
       </div>
 
       <!-- UPSTREAM -->
@@ -346,7 +374,68 @@ Berikut pengetesan Failover :
 <script src="laporfo.js"></script>
 <script src="bwtest.js"></script>
 
+
+
 <script>
+
+function generateNonRFOTemplate() {
+
+  const waktu = getWaktuWIB();
+
+  document.getElementById('out_nonRFO').innerText =
+`Selamat ${waktu},
+
+Kami informasikan untuk link FO saat ini sudah kembali normal dan dalam monitoring kami. Untuk koneksi internet dapat dicoba kembali.
+
+Terkait RFO akan kami informasikan menyusul setelah proses pengecekan dan analisa dari tim terkait selesai dilakukan.
+
+Terima kasih.
+`;
+
+}
+
+function generateRFOTemplate() {
+
+  const waktu = getWaktuWIB();
+
+  document.getElementById('out_RFO').innerText =
+`Selamat ${waktu}, 
+
+Kami informasikan untuk link FO sudah kembali normal dan dalam monitoring kami. Detail gangguan yang dapat kami sampaikan sebagai berikut :
+
+Waktu Mulai 		: 
+Waktu Selesai 		: 
+Detail Gangguan     : 
+Tindakan 		: 
+
+Kami mohon maaf atas ketidaknyamanannya yang ditimbulkan.
+
+Terimakasih.
+`;
+
+}
+
+function generateRFO() {
+
+  const waktu = getWaktuWIB();
+
+  document.getElementById('out_RFO').innerText =
+`Selamat ${waktu},
+
+Kami informasikan untuk link FO sudah kembali normal dan dalam monitoring kami. Detail gangguan yang dapat kami sampaikan sebagai berikut :
+
+• Waktu Mulai      : ${rfo_waktuMulai.value}
+• Waktu Selesai    : ${rfo_waktuSelesai.value}
+• Detail Gangguan  : ${rfo_detailGangguan.value}
+• Tindakan         : ${rfo_tindakan.value}
+
+Kami mohon maaf atas ketidaknyamanannya yang ditimbulkan.
+
+Terimakasih.`;
+
+}
+
+const waktu = getWaktuWIB();
   // Fungsi ini langsung berjalan otomatis saat file dimuat
 (function autoFillTanggal() {
   const element = document.getElementById('autoTanggal');
@@ -369,6 +458,9 @@ function copyText(id){
   toast.classList.add('show');
   setTimeout(()=>toast.classList.remove('show'),2000);
 }
+
+generateRFOTemplate()
+generateNonRFOTemplate()
 
 </script>
 
