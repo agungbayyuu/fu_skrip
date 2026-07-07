@@ -321,6 +321,10 @@ Berikut pengetesan Failover :
         <button class="action" onclick="generateUpstream()">Generate</button>
         <div class="output" id="outUpstream"></div>
         <button class="copy-btn" onclick="copyText('outUpstream')">Copy</button>
+        <label>Link Intercity/Upstream sudah Normal tetapi belum ada RFO</label>
+        <div class="output" id="outUpstreamNonRFO"></div>
+        <button class="copy-btn" onclick="copyText('outUpstreamNonRFO')">Copy</button>
+
       </div>
 
       <!-- Tiket FO Cut -->
@@ -394,6 +398,18 @@ Terkait RFO akan kami informasikan menyusul setelah proses pengecekan dan analis
 Terima kasih.
 `;
 
+  document.getElementById('outUpstreamNonRFO').innerText =
+`Selamat ${waktu},
+
+Mohon maaf atas ketidaknyamanan yang Bapak/Ibu alami.
+
+Saat ini koneksi terpantau mulai berangsur pulih. Bapak/Ibu dapat mencoba kembali koneksi secara berkala.
+
+Terkait kendala yang terjadi serta langkah penanganannya, saat ini tim kami masih melakukan koordinasi secara internal. Kami mohon kesediaan Bapak/Ibu untuk menunggu informasi pembaruan selanjutnya dari kami.
+
+Terima kasih
+`;
+
 }
 
 function generateRFOTemplate() {
@@ -463,6 +479,7 @@ function copyText(id){
 
 generateRFOTemplate()
 generateNonRFOTemplate()
+
 
 </script>
 
