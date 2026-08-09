@@ -7,7 +7,7 @@ function generateTiketFOCut(){
     return;
   }
 
-  const script =
+  const scriptHD =
 `(function () {
 
   $('#issue_tracker_id').val('1').trigger('change');
@@ -40,7 +40,48 @@ Terimakasih\`
 
 })();`;
 
-  scriptTicket.innerText = script;
+const scriptSW =
+`(function () {
+
+  $('#issue_tracker_id').val('1').trigger('change');
+  $('#issue_status_id').val('1').trigger('change');
+
+  $(document).one('ajaxStop', function () {
+
+    $('#issue_subject').val('(Link Problem) FO Cut - ${nama}');
+
+    $('#issue_description').val(
+\`Dear Team
+
+Terpantau link FO Cut pada site ${nama}.
+
+Status saat ini masih dalam progress pengecekan pada vendor terkait.
+
+Terimakasih\`
+    );
+
+    $('#issue_assigned_to_id').val('179');
+
+    $('#issue_category_id option:contains("Troubleshoot Eksternal")').prop('selected', true);
+    $('#issue_category_id').trigger('change');
+
+    // Problem Category -> "Fo 3rd party Problem"
+    $('#issue_custom_field_values_18').val('Fo 3rd party Problem').trigger('change');
+
+    // List Vendor Fo 3rd Party -> "PT. Cendikia Global Solusi"
+    $('#issue_custom_field_values_185').val('PT. Cendikia Global Solusi').trigger('change');
+
+    // Problem Tag -> "Physical"
+    $('#issue_custom_field_values_184').val('Physical').trigger('change');
+
+    console.log('✔️ Ticket FO Cut berhasil digenerate');
+
+  });
+
+})();`;
+
+  scriptTicketHD.innerText = scriptHD;
+  scriptTicketSW.innerText = scriptSW;
 
   urlTicket.innerText =
   "https://project.dwp.io/projects/link-3rd-party-untuk-user/issues/new";
