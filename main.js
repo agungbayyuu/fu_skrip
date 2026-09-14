@@ -9,6 +9,7 @@ function showTab(tab){
   tabLaporFOProblem.style.display='none';
   tabTestFailover.style.display='none';
   tabBandwidthTest.style.display='none';
+  tabSummaryLinkFO.style.display='none';
 
 
   if(tab==='follow') tabFollow.style.display='block';
@@ -21,6 +22,7 @@ function showTab(tab){
   if(tab==='LaporFOProblem') tabLaporFOProblem.style.display='block';
   if(tab==='TestFailover') tabTestFailover.style.display='block';
   if(tab==='BandwidthTest') tabBandwidthTest.style.display='block';
+  if(tab==='SummaryLinkFO') tabSummaryLinkFO.style.display='block';
   
 
 
@@ -41,6 +43,7 @@ function showTab(tab){
   if (tab === 'LaporFOProblem') document.getElementById('mLaporFOProblem').classList.add('active');
   if (tab === 'TestFailover') document.getElementById('mTestFailover').classList.add('active');
   if (tab === 'BandwidthTest') document.getElementById('mBandwidthTest').classList.add('active');
+  if (tab === 'SummaryLinkFO') document.getElementById('mSummaryLinkFO').classList.add('active');
 }
 
  function getWaktuWIB(){
@@ -54,6 +57,3 @@ function showTab(tab){
       if (hour >= 15 && hour < 18) return 'sore';
       return 'malam';
 }
-
-
-

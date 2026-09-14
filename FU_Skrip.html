@@ -24,12 +24,76 @@
     <button id="mLaporFOProblem" onclick="showTab('LaporFOProblem')">🌐 Lapor 3rd Party FO</button>
     <button id="mTestFailover" onclick="showTab('TestFailover')">🌐 Test Failover</button>
     <button id="mBandwidthTest" onclick="showTab('BandwidthTest')">🌐 Bandwidth Test</button>
+    <button id="mSummaryLinkFO" onclick="showTab('SummaryLinkFO')">📋 Summary Link FO Down</button>
     <footer>© 2025<br>Support</footer>
   </div>
 
   <!-- CONTENT -->
   <div class="content">
     <div class="card" class="test">
+
+      <!-- SUMMARY LINK FO DOWN -->
+      <div id="tabSummaryLinkFO" style="display:none">
+        <h2>Summary Link FO Down</h2>
+
+        <div class="output-grid">
+          <div class="output-item">
+            <label>Deskripsi Problem</label>
+            <input id="summary_deskripsi" placeholder="Gejala teramati: alarm, komplain customer, error log dll">
+
+            <label>Frekuensi Problem</label>
+            <select id="summary_frekuensi">
+              <option value="Sekali">Sekali</option>
+              <option value="Berulang">Berulang</option>
+              <option value="Intermittent">Intermittent</option>
+            </select>
+
+            <label>Pola (jika ada)</label>
+            <input id="summary_pola" placeholder="Isikan pola gangguan jika berulang/intermittent">
+
+            <label>Area</label>
+            <input id="summary_area" placeholder="Kota lokasi kejadian gangguan">
+
+            <label>Zona Waktu</label>
+            <select id="summary_zona">
+              <option value="WIB">WIB</option>
+              <option value="WIT">WIT</option>
+              <option value="WITA">WITA</option>
+            </select>
+
+            <label>Start Time (Tanggal)</label>
+            <input type="date" id="summary_startDate">
+            <label>Start Time (Jam)</label>
+            <input type="time" id="summary_startTime">
+
+            <label>Resolved Time (Tanggal)</label>
+            <input type="date" id="summary_resolvedDate">
+            <label>Resolved Time (Jam)</label>
+            <input type="time" id="summary_resolvedTime">
+          </div>
+
+          <div class="output-item">
+            <label>Tikor Latitude (khusus FO Cut)</label>
+            <input id="summary_tikorLat" placeholder="Contoh: -7.345607">
+            <label>Tikor Longitude (khusus FO Cut)</label>
+            <input id="summary_tikorLong" placeholder="Contoh: 112.783338">
+
+            <label>Detail Gangguan</label>
+            <input id="summary_detailGangguan" placeholder="Isi detail teknis gangguan yang sedang terjadi">
+
+            <label>Penyebab Gangguan</label>
+            <input id="summary_penyebab" placeholder="Contoh: FO Cut Impact Hit By Vehicle">
+
+            <label>Tindakan Perbaikan</label>
+            <input id="summary_perbaikan" placeholder="Contoh: Jumper & Splicing FO By Team">
+
+            <button class="action" onclick="generateSummaryLinkFO()">Generate</button>
+          </div>
+        </div>
+
+        <div class="output" id="outSummaryLinkFO"></div>
+        <button class="copy-btn" onclick="copyText('outSummaryLinkFO')">Copy</button>
+      </div>
 
       <!-- Bandwidth Test -->
       <div id="tabBandwidthTest" style="display:none">
@@ -384,6 +448,7 @@ Berikut pengetesan Failover :
 <script src="spamemail.js"></script>
 <script src="laporfo.js"></script>
 <script src="bwtest.js"></script>
+<script src="summarylinkfo.js"></script>
 
 
 
