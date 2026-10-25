@@ -22,7 +22,7 @@ Terima kasih.
     let t =
 `Selamat ${w}, 
     
-Kami informasikan bahwa saat ini terdapat kendala pada link FO pada ${nama_FO.value}.`;
+Kami informasikan bahwa saat ini terdapat kendala link FO pada ${nama_FO.value}.`;
 
     // JIKA ADA BACKUP
     if (backup.value === 'ada') {
