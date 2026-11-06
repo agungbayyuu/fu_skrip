@@ -6,7 +6,7 @@ function generateFollowUp(){
   if(!nama.value) return outFollow.innerText='⚠️ Nama belum diisi';
 
   outFollow.innerText=
-`Selamat ${getWaktuWIB()}
+`Selamat ${getWaktuWIB()} Bapak/Ibu
 
 Kami informasikan untuk perangkat di lokasi ${nama.value} termonitoring down dalam sistem kami. Mohon informasi apakah sedang ada kendala kelistrikan dilokasi?
 
