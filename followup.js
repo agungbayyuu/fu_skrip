@@ -8,7 +8,7 @@ function generateFollowUp(){
   outFollow.innerText=
 `Selamat ${getWaktuWIB()}
 
-Kami informasikan untuk site ${nama.value} termonitoring down dalam sistem kami. Apabila terdapat kendala koneksi dapat diinformasikan pada kami, atau mohon informasi apa sedang kendala kelistrikan dilokasi?
+Kami informasikan untuk perangkat di lokasi ${nama.value} termonitoring down dalam sistem kami. Mohon informasi apakah sedang ada kendala kelistrikan dilokasi?
 
 Terimakasih
 ~${ini}`;
