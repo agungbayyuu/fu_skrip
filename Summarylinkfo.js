@@ -1,8 +1,8 @@
-function hitungDurasi(startDate, startTime, resolvedDate, resolvedTime) {
-  if (!startDate || !startTime || !resolvedDate || !resolvedTime) return null;
+function hitungDurasi(startValue, resolvedValue) {
+  if (!startValue || !resolvedValue) return null;
 
-  const start = new Date(`${startDate}T${startTime}:00`);
-  const resolved = new Date(`${resolvedDate}T${resolvedTime}:00`);
+  const start = new Date(startValue);
+  const resolved = new Date(resolvedValue);
 
   let diffMs = resolved - start;
   if (isNaN(diffMs)) return null;
@@ -15,9 +15,10 @@ function hitungDurasi(startDate, startTime, resolvedDate, resolvedTime) {
   return `${jam} jam ${menit} menit`;
 }
 
-function formatTanggalJam(dateStr, timeStr, zona) {
-  if (!dateStr || !timeStr) return '-';
-  return `${dateStr} ${timeStr} ${zona}`;
+// "2026-11-08T21:02" -> "2026-11-08 21:02 WIB"
+function formatTanggalJam(value, zona) {
+  if (!value) return '-';
+  return `${value.replace('T', ' ')} ${zona}`;
 }
 
 function generateSummaryLinkFO() {
@@ -26,10 +27,8 @@ function generateSummaryLinkFO() {
   const pola = document.getElementById('summary_pola').value.trim();
   const area = document.getElementById('summary_area').value.trim();
 
-  const startDate = document.getElementById('summary_startDate').value;
-  const startTime = document.getElementById('summary_startTime').value;
-  const resolvedDate = document.getElementById('summary_resolvedDate').value;
-  const resolvedTime = document.getElementById('summary_resolvedTime').value;
+  const startValue = document.getElementById('summary_startDate').value;
+  const resolvedValue = document.getElementById('summary_resolvedDate').value;
   const zona = document.getElementById('summary_zona').value;
 
   const tikorLat = document.getElementById('summary_tikorLat').value.trim();
@@ -41,10 +40,9 @@ function generateSummaryLinkFO() {
 
   const output = document.getElementById('outSummaryLinkFO');
 
-
-  const startTimeText = formatTanggalJam(startDate, startTime, zona);
-  const resolvedTimeText = formatTanggalJam(resolvedDate, resolvedTime, zona);
-  const durasi = hitungDurasi(startDate, startTime, resolvedDate, resolvedTime) || '-';
+  const startTimeText = formatTanggalJam(startValue, zona);
+  const resolvedTimeText = formatTanggalJam(resolvedValue, zona);
+  const durasi = hitungDurasi(startValue, resolvedValue) || '-';
 
   let frekuensiText = frekuensi;
   if (pola) frekuensiText += ` (${pola})`;
