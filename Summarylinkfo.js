@@ -41,10 +41,6 @@ function generateSummaryLinkFO() {
 
   const output = document.getElementById('outSummaryLinkFO');
 
-  if (!deskripsi || !area || !startDate || !startTime || !resolvedDate || !resolvedTime) {
-    output.innerText = '⚠️ Mohon lengkapi minimal Deskripsi, Area, Start Time, dan Resolved Time';
-    return;
-  }
 
   const startTimeText = formatTanggalJam(startDate, startTime, zona);
   const resolvedTimeText = formatTanggalJam(resolvedDate, resolvedTime, zona);
